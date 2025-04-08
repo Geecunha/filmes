@@ -1,11 +1,12 @@
 package org.acme.entitys;
 
-import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import jakarta.persistence.*;
+import org.acme.enums.Genero;
 import jakarta.validation.constraints.*;
 
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "autor")
@@ -22,20 +23,25 @@ public class Autor extends PanacheEntityBase {
     public String cpf;
     public int idade;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    public Genero genero;
+
     // Um autor pode escrever vários livros
     @OneToMany(mappedBy = "autor")
     public List<Livro> livrosAutor;
 
     // Muitos autores podem publicar em muitas editoras
     @ManyToMany(mappedBy = "autoresEditora")
-    public List<Editora> editoraAutor;
+    public Set<Editora> editoraAutor;
 
     public Autor() {}
 
-    public Autor(String nome, String cpf, int idade) {
+    public Autor(String nome, String cpf, int idade, Genero genero) {
         this.nome = nome;
         this.cpf = cpf;
         this.idade = idade;
+        this.genero = genero;
     }
 
     public String getNome() {
@@ -70,12 +76,20 @@ public class Autor extends PanacheEntityBase {
         this.livrosAutor = livrosAutor;
     }
 
-    public List<Editora> getEditoraAutor() {
+    public Set<Editora> getEditoraAutor() {
         return editoraAutor;
     }
 
-    public void setEditoraAutor(List<Editora> editoraAutor) {
+    public void setEditoraAutor(Set<Editora> editoraAutor) {
         this.editoraAutor = editoraAutor;
+    }
+
+    public Genero getGenero() {
+        return genero;
+    }
+
+    public void setGenero(Genero genero) {
+        this.genero = genero;
     }
 
     @Override
@@ -85,6 +99,7 @@ public class Autor extends PanacheEntityBase {
                 ", nome='" + nome + '\'' +
                 ", cpf='" + cpf + '\'' +
                 ", idade=" + idade +
+                ", genero=" + genero +
                 ", livrosAutor=" + livrosAutor +
                 ", editoraAutor=" + editoraAutor +
                 '}';

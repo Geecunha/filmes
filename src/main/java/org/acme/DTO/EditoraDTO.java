@@ -21,8 +21,8 @@ public class EditoraDTO {
 
     @NotBlank(message = "Insira o CEP")
     public String cep;
+
     public List<LivroResumoDTO> livros;
-    public List<AutorResumoDTO> autores;
 
     public EditoraDTO(Editora editora) {
         this.id = editora.editora_id;
@@ -34,12 +34,6 @@ public class EditoraDTO {
         this.livros = editora.livrosEditora != null
                 ? editora.livrosEditora.stream()
                 .map(l -> new LivroResumoDTO(l.livro_id, l.titulo))
-                .collect(Collectors.toList())
-                : List.of();
-
-        this.autores = editora.autoresEditora != null
-                ? editora.autoresEditora.stream()
-                .map(a -> new AutorResumoDTO(a.autor_id, a.nome))
                 .collect(Collectors.toList())
                 : List.of();
     }

@@ -90,7 +90,6 @@ public class EditoraResource {
         entidade.site = editora.site;
         entidade.cep = editora.cep;
         entidade.livrosEditora = editora.livrosEditora;
-        entidade.autoresEditora = editora.autoresEditora;
 
         return Response.ok(entidade).build();
     }
@@ -112,5 +111,4 @@ public class EditoraResource {
         }
         return Response.status(Response.Status.NOT_FOUND).build();
     }
-
 }

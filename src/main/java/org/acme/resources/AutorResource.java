@@ -12,7 +12,6 @@ import org.acme.DTO.AutorDTO;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 
 import java.net.URI;
-import java.util.List;
 
 @Path("/autor")
 @ApplicationScoped
@@ -56,8 +55,6 @@ public class AutorResource {
         }
         return new AutorDTO(autor);
     }
-
-
 
     @POST // rota 3: Cria um novo autor.
     @Operation(
