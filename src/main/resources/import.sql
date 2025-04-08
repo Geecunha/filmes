@@ -23,7 +23,7 @@ INSERT INTO autor (nome, cpf, idade, genero) VALUES ('José Saramago', '99900011
 INSERT INTO autor (nome, cpf, idade, genero) VALUES ('Virginia Woolf', '00011122200', 59, 'FEMININO');
 
 
--- EDITORAS (20 registros)
+-- EDITORAS
 
 INSERT INTO editora (nome, cnpj, site, cep) VALUES ('Bloomsbury Publishing', '00112233000144', 'https://www.bloomsbury.com', '12345678');
 INSERT INTO editora (nome, cnpj, site, cep) VALUES ('Bantam Books', '11223344000155', 'https://www.bantambooks.com', '23456789');

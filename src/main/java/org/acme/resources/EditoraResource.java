@@ -8,10 +8,7 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.acme.DTO.EditoraDTO;
-import org.acme.DTO.LivroDTO;
-import org.acme.entitys.Autor;
 import org.acme.entitys.Editora;
-import org.acme.entitys.Livro;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 
 import java.net.URI;
@@ -70,6 +67,9 @@ public class EditoraResource {
         return Response.created(URI.create("/editora/" + editora.editora_id)).entity(editora).build();
     }
 
+
+
+
     @PUT // rota 4: Atualizar editora por ID.
     @Path("/{id}")
     @Operation(
@@ -96,7 +96,7 @@ public class EditoraResource {
 
 
     @DELETE // rota 5: Excluir editora por ID.
-    @Path("/{id}")
+    @Path("deletarEditora/{id}")
     @Operation(
             summary = "Exclui editora por ID",
             description = """

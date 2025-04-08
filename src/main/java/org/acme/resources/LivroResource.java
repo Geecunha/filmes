@@ -129,7 +129,7 @@ public class LivroResource {
     }
 
     @PUT
-    @Path("/basico/{id}")
+    @Path("/basico/{id}")// rota 5: Atualiza somente título e número de páginas do livro
     @Transactional
     @Operation(
             summary = "Atualiza somente título e número de páginas do livro",
@@ -147,14 +147,14 @@ public class LivroResource {
         }
     }
 
-    @DELETE // rota 5: Exclui livro.
+    @DELETE // rota 6: Exclui livro.
     @Operation(
             summary = "Exclui livro por ID",
             description = """
                     Essa rota exclui um livro do sistema a partir do seu ID.
                     Caso o ID não seja encontrado, retorna 404."""
     )
-    @Path("/{id}")
+    @Path("deletarLivro/{id}")
     @Transactional
     public Response excluir(@Valid @PathParam("id") Long id) {
         boolean excluido = Livro.deleteById(id);

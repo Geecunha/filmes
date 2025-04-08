@@ -67,6 +67,7 @@ public class AutorResource {
         return Response.created(URI.create("/autor/" + autor.autor_id)).entity(autor).build();
     }
 
+
     @PUT // rota 4: Atualiza autor existente.
     @Path("/{id}")
     @Operation(
@@ -92,7 +93,7 @@ public class AutorResource {
     }
 
     @DELETE // rota 5: Exclui autor por ID.
-    @Path("/{id}")
+    @Path("deletarAutor/{id}")
     @Transactional
     @Operation(
             summary = "Exclui autor por ID",
