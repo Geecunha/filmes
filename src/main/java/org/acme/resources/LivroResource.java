@@ -3,20 +3,16 @@ package org.acme.resources;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import org.acme.DTO.AutorDTO;
 import org.acme.DTO.LivroCadastroDTO;
-import org.acme.DTO.LivroDTO;
-import org.acme.DTO.LivroPutDTO;
-import org.acme.entitys.Autor;
-import org.acme.entitys.Editora;
-import org.acme.entitys.Livro;
+import org.acme.DTO.FilmeDTO;
+import org.acme.entitys.Diretor;
+import org.acme.entitys.Produtora;
+import org.acme.entitys.Filme;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 
-import java.net.URI;
 import java.util.List;
 
 @Path("/livro")
@@ -33,12 +29,12 @@ public class LivroResource {
     )
     @Transactional
     public Response listarTodos() { // em vez de listar Livros, irá listar LivrosDTO sem causar um erro.
-        List<Livro> livros = Livro.find("SELECT l FROM Livro l JOIN FETCH l.editora JOIN FETCH l.autor").list();
+        List<Filme> livros = Filme.find("SELECT l FROM Livro l JOIN FETCH l.editora JOIN FETCH l.autor").list();
 
         if (livros.isEmpty()) {
             return Response.status(Response.Status.NO_CONTENT).build();
         } else {
-            List<LivroDTO> livrosDTO = livros.stream().map(LivroDTO::new).toList();
+            List<FilmeDTO> livrosDTO = livros.stream().map(FilmeDTO::new).toList();
             return Response.ok(livrosDTO).build();
         }
     }
@@ -54,12 +50,12 @@ public class LivroResource {
     )
     @Path("/{id}")
     @Transactional
-    public LivroDTO buscarPorId(@PathParam("id") Long id) {
-        Livro livro = Livro.findById(id);
+    public FilmeDTO buscarPorId(@PathParam("id") Long id) {
+        Filme livro = Filme.findById(id);
         if (livro == null) {
             throw new NotFoundException("livro não encontrado!");
         }
-        return new LivroDTO(livro);
+        return new FilmeDTO(livro);
     }
 
 
@@ -73,28 +69,28 @@ public class LivroResource {
     )
     @Transactional
     public Response criarLivro(@Valid LivroCadastroDTO dto) {
-        Autor autor = Autor.findById(dto.autor);
+        Diretor autor = Diretor.findById(dto.autor);
         if (autor == null) {
             return Response.status(Response.Status.BAD_REQUEST)
                     .entity("Autor com ID " + dto.autor + " não encontrado.")
                     .build();
         }
 
-        Editora editora = Editora.findById(dto.editora);
+        Produtora editora = Produtora.findById(dto.editora);
         if (editora == null) {
             return Response.status(Response.Status.BAD_REQUEST)
                     .entity("Editora com ID " + dto.editora + " não encontrada.")
                     .build();
         }
 
-        Livro livro = new Livro();
+        Filme livro = new Filme();
         livro.titulo = dto.titulo;
         livro.numPag = dto.numPag;
         livro.autor = autor;
         livro.editora = editora;
         livro.persist();
 
-        return Response.status(Response.Status.CREATED).entity(new LivroDTO(livro)).build();
+        return Response.status(Response.Status.CREATED).entity(new FilmeDTO(livro)).build();
     }
 
 
@@ -108,12 +104,12 @@ public class LivroResource {
     @Path("/{id}")
     @Transactional
     public Response atualizarLivro(@PathParam("id") Long id, @Valid LivroCadastroDTO dto) {
-        Livro livro = Livro.findById(id);
+        Filme livro = Filme.findById(id);
         if (livro == null) {
             return Response.status(Response.Status.NOT_FOUND).entity("Livro não encontrado").build();
         } else {
-            Autor autor = Autor.findById(dto.autor);
-            Editora editora = Editora.findById(dto.editora);
+            Diretor autor = Diretor.findById(dto.autor);
+            Produtora editora = Produtora.findById(dto.editora);
 
             if (autor == null || editora == null) {
                 return Response.status(Response.Status.BAD_REQUEST).entity("Autor ou Editora não encontrados").build();
@@ -124,7 +120,7 @@ public class LivroResource {
             livro.autor = autor;
             livro.editora = editora;
 
-            return Response.ok(new LivroDTO(livro)).build();
+            return Response.ok(new FilmeDTO(livro)).build();
         }
     }
 
@@ -135,15 +131,15 @@ public class LivroResource {
             summary = "Atualiza somente título e número de páginas do livro",
             description = "Essa rota edita apenas o título e o número de páginas de um livro já existente"
     )
-    public Response atualizarLivroBasico(@PathParam("id") Long id,@Valid LivroPutDTO dto) {
-        Livro livro = Livro.findById(id);
+    public Response atualizarLivroBasico(@PathParam("id") Long id,@Valid FilmePutDTO dto) {
+        Filme livro = Filme.findById(id);
         if (livro == null) {
             return Response.status(Response.Status.NOT_FOUND).entity("Livro não encontrado").build();
         } else {
             livro.titulo = dto.titulo;
             livro.numPag = dto.numPag;
 
-            return Response.ok(new LivroDTO(livro)).build();
+            return Response.ok(new FilmeDTO(livro)).build();
         }
     }
 
@@ -157,7 +153,7 @@ public class LivroResource {
     @Path("deletarLivro/{id}")
     @Transactional
     public Response excluir(@Valid @PathParam("id") Long id) {
-        boolean excluido = Livro.deleteById(id);
+        boolean excluido = Filme.deleteById(id);
         if (excluido) {
             return Response.noContent().build();
         }

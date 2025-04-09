@@ -2,12 +2,12 @@ package org.acme.DTO;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-import org.acme.entitys.Editora;
+import org.acme.entitys.Produtora;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class EditoraDTO {
+public class ProdutoraDTO {
     public Long id;
     @NotBlank(message = "O nome da editora é obrigatório")
     public String nome;
@@ -22,9 +22,9 @@ public class EditoraDTO {
     @NotBlank(message = "Insira o CEP")
     public String cep;
 
-    public List<LivroResumoDTO> livros;
+    public List<FilmeResumoDTO> livros;
 
-    public EditoraDTO(Editora editora) {
+    public ProdutoraDTO(Produtora editora) {
         this.id = editora.editora_id;
         this.nome = editora.nome;
         this.cnpj = editora.cnpj;
@@ -33,7 +33,7 @@ public class EditoraDTO {
 
         this.livros = editora.livrosEditora != null
                 ? editora.livrosEditora.stream()
-                .map(l -> new LivroResumoDTO(l.livro_id, l.titulo))
+                .map(l -> new FilmeResumoDTO(l.livro_id, l.titulo))
                 .collect(Collectors.toList())
                 : List.of();
     }

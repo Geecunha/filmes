@@ -7,8 +7,8 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import org.acme.DTO.EditoraDTO;
-import org.acme.entitys.Editora;
+import org.acme.DTO.ProdutoraDTO;
+import org.acme.entitys.Produtora;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 
 import java.net.URI;
@@ -27,15 +27,15 @@ public class EditoraResource {
     )
     @Transactional
     public Response listarTodos() {
-        List<Editora> editoras = Editora.find(
+        List<Produtora> editoras = Produtora.find(
                 "SELECT DISTINCT e FROM Editora e LEFT JOIN FETCH e.livrosEditora LEFT JOIN FETCH e.autoresEditora"
         ).list();
 
         if (editoras.isEmpty()) {
             return Response.status(Response.Status.NO_CONTENT).build();
         } else {
-            List<EditoraDTO> editoraDTOs = editoras.stream()
-                    .map(EditoraDTO::new)
+            List<ProdutoraDTO> editoraDTOs = editoras.stream()
+                    .map(ProdutoraDTO::new)
                     .toList();
             return Response.ok(editoraDTOs).build();
         }
@@ -48,12 +48,12 @@ public class EditoraResource {
             description = "Essa rota é responsável por buscar uma editora pelo ID."
     )
     @Transactional
-    public EditoraDTO buscarPorId(@PathParam("id") Long id) {
-        Editora editora= Editora.findById(id);
+    public ProdutoraDTO buscarPorId(@PathParam("id") Long id) {
+        Produtora editora= Produtora.findById(id);
         if (editora == null) {
             throw new NotFoundException("editora não encontrado!");
         }
-        return new EditoraDTO(editora);
+        return new ProdutoraDTO(editora);
     }
 
     @POST // rota 3: Cria nova editora.
@@ -62,7 +62,7 @@ public class EditoraResource {
             description = "Essa rota permite cadastrar uma nova editora."
     )
     @Transactional
-    public Response criar(@NotNull @Valid Editora editora) {
+    public Response criar(@NotNull @Valid Produtora editora) {
         editora.persist();
         return Response.created(URI.create("/editora/" + editora.editora_id)).entity(editora).build();
     }
@@ -79,8 +79,8 @@ public class EditoraResource {
                     Caso a editora não exista, retorna 404."""
     )
     @Transactional
-    public Response atualizar(@PathParam("id") Long id, @NotNull @Valid Editora editora) {
-        Editora entidade = Editora.findById(id);
+    public Response atualizar(@PathParam("id") Long id, @NotNull @Valid Produtora editora) {
+        Produtora entidade = Produtora.findById(id);
         if (entidade == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
@@ -105,7 +105,7 @@ public class EditoraResource {
     )
     @Transactional
     public Response excluir(@PathParam("id") Long id) {
-        boolean excluido = Editora.deleteById(id);
+        boolean excluido = Produtora.deleteById(id);
         if (excluido) {
             return Response.noContent().build();
         }

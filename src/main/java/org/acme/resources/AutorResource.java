@@ -7,8 +7,8 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import org.acme.entitys.Autor;
-import org.acme.DTO.AutorDTO;
+import org.acme.entitys.Diretor;
+import org.acme.DTO.DiretorDTO;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 
 import java.net.URI;
@@ -26,9 +26,9 @@ public class AutorResource {
     )
     @Transactional
     public Response listarTodos() {
-        var listarTodos = Autor.listAll();
+        var listarTodos = Diretor.listAll();
         var autorDTOs = listarTodos.stream()
-                .map(a -> new AutorDTO((Autor) a))
+                .map(a -> new DiretorDTO((Diretor) a))
                 .toList();
         if (listarTodos.isEmpty()) {
             return Response.status(Response.Status.NO_CONTENT).build();
@@ -48,12 +48,12 @@ public class AutorResource {
     )
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
-    public AutorDTO buscarPorId(@PathParam("id") Long id) {
-        Autor autor = Autor.findById(id);
+    public DiretorDTO buscarPorId(@PathParam("id") Long id) {
+        Diretor autor = Diretor.findById(id);
         if (autor == null) {
             throw new NotFoundException("Autor não encontrado");
         }
-        return new AutorDTO(autor);
+        return new DiretorDTO(autor);
     }
 
     @POST // rota 3: Cria um novo autor.
@@ -62,7 +62,7 @@ public class AutorResource {
             description = "Essa rota é responsável por cadastrar um novo autor no sistema."
     )
     @Transactional
-    public Response criar(@NotNull @Valid Autor autor) {
+    public Response criar(@NotNull @Valid Diretor autor) {
         autor.persist();
         return Response.created(URI.create("/autor/" + autor.autor_id)).entity(autor).build();
     }
@@ -77,8 +77,8 @@ public class AutorResource {
                     Caso o autor não exista, retorna 404."""
     )
     @Transactional
-    public Response atualizar(@PathParam("id") Long id, @NotNull @Valid Autor autor) {
-        Autor entidade = Autor.findById(id);
+    public Response atualizar(@PathParam("id") Long id, @NotNull @Valid Diretor autor) {
+        Diretor entidade = Diretor.findById(id);
         if (entidade == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
@@ -102,7 +102,7 @@ public class AutorResource {
                     Caso o ID não seja encontrado, retorna 404."""
     )
     public Response excluir(@PathParam("id") Long id) {
-        boolean excluido = Autor.deleteById(id);
+        boolean excluido = Diretor.deleteById(id);
         if (excluido) {
             return Response.noContent().build();
         }
