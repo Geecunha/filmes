@@ -1,79 +1,93 @@
+# 🎬 API de Filmes
 
-# API de Livros
+API desenvolvida para cadastrar **Filmes**, visualizar os **diretores** responsáveis por cada produção e suas respectivas **produtoras**.
 
-API desenvolvida para cadastrar Livros, e visualizar quais autores e editoras foramr esponsáveis pelo livro escolhido
+---
 
+## 👩‍💻 Autora do Projeto
 
-## Autora do projeto
+- **Geovanna Cardoso**
+- Repositório: `filmes-api`
+- Link do projeto: [https://filmes-api-production.up.railway.app/swagger-ui/](https://filmes-api-production.up.railway.app/swagger-ui/)
 
-- Giovanna Piccinato
-- Repositório: API-Livros
-- Link do projeto: https://api-livros-production.up.railway.app/swagger-ui/
+---
 
+## 🧪 Como Rodar Localmente
 
-## Como rodar localmente
-
-1 - Clone o repositório:
+1. **Clone o repositório:**
 
 ```bash
-    git clone https://github.com/GiovannaPiccinato/API-Livros
-    cd seu-repo 
+git clone https://github.com/geovannacardoso/filmes-api
+cd filmes-api
 ```
 
-
-2 - Execute o projeto com:
+2. **Execute o projeto:**
 
 ```bash
-  ./mvnw quarkus:dev
+./mvnw quarkus:dev
 ```
 
+> A API será disponibilizada em: `http://localhost:8080/q/swagger-ui/`
 
+---
 
-> A API será disponibilizada em: https://api-livros-production.up.railway.app/swagger-ui/
+## ✨ Funcionalidades Principais
 
-##  Funcionalidades Principais
-
-### Autor Resource
+### 🎬 Filme Resource
 
 | Método | Rota | Descrição |
 |--------|------|-----------|
-| `GET`  | `/autor` | Listar todos os autores |
-| `POST` | `/autor` | Cadastrar novo autor |
-| `PUT`  | `/autor/{id}` | Atualizar autor existente |
-| `DELETE` | `/autor/deletarAutor/{id}` | Deletar autor |
-| `GET`  | `/autor/findAutor/{id}` | Buscar autor por ID |
+| `GET`  | `/filmes` | Listar todos os filmes |
+| `GET`  | `/filmes/{id}` | Buscar filme por ID |
+| `POST` | `/filmes` | Cadastrar novo filme |
+| `PUT`  | `/filmes/{id}` | Atualizar filme existente |
+| `DELETE` | `/filmes/deletar/{id}` | Deletar filme |
+| `GET`  | `/filmes/top3` | Retornar os 3 filmes com maiores notas |
+| `GET`  | `/filmes/por-diretor/{id}` | Listar filmes de um diretor específico |
+| `GET`  | `/filmes/por-produtora/{id}` | Listar filmes de uma produtora específica |
 
 ---
 
-### Editora Resource
+### 🎥 Diretor Resource
 
 | Método | Rota | Descrição |
 |--------|------|-----------|
-| `GET` | `/editora` | Listar todas as editoras |
-| `GET`  | `/editora/findEditora` | Buscar editora por ID |
-| `POST`  | `/editora` | Cadastrar nova editora |
-| `PUT`  | `/editora/{id}` |  Atualizar editora existente |
-| `DELETE` | `/inscricoes/deletarEditora` | Deletar editora |
+| `GET`  | `/diretores` | Listar todos os diretores |
+| `GET`  | `/diretores/{id}` | Buscar diretor por ID |
+| `POST` | `/diretores` | Cadastrar novo diretor |
+| `PUT`  | `/diretores/{id}` | Atualizar diretor existente |
+| `DELETE` | `/diretores/deletar/{id}` | Deletar diretor |
 
 ---
 
-### Livro Resource
+### 🏢 Produtora Resource
 
 | Método | Rota | Descrição |
 |--------|------|-----------|
-| `GET`  | `/livro` | Listar todos os livros |
-| `POST` | `/livro/criar` | Cadastrar novo livro |
-| `PUT`  | `/livro/{id}` | Atualizar livro existente |
-| `DELETE` | `/livro/deletarLivro/{id}` | Deletar livro |
-| `GET`  | `/livro/findLivro/{id}` | Buscar livro por ID |
-| `PUT`  | `/livro/basico/{id}}` | Atualiza somente título e número de páginas do livro |
+| `GET`  | `/produtoras` | Listar todas as produtoras |
+| `GET`  | `/produtoras/{id}` | Buscar produtora por ID |
+| `POST` | `/produtoras` | Cadastrar nova produtora |
+| `PUT`  | `/produtoras/{id}` | Atualizar produtora existente |
+| `DELETE` | `/produtoras/deletar/{id}` | Deletar produtora |
 
 ---
 
-## Deploy
+## 🌍 Deploy
 
-Para realizar o deploy desse projeto utilizamos o Reilway
+Este projeto está hospedado no Railway:
 
-    Você pode fazer o deploy desta API no [Railway](https://railway.app/).
+> Acesse a documentação Swagger da API em:  
+> [https://filmes-api-production.up.railway.app/swagger-ui/](https://filmes-api-production.up.railway.app/swagger-ui/)
+
+Você também pode hospedar seu próprio projeto gratuitamente com [Railway](https://railway.app/).
 
 ---
+
+## 📚 Tecnologias Utilizadas
+
+- **Quarkus**
+- **Java 17**
+- **Hibernate ORM com Panache**
+- **Banco H2**
+- **Swagger (OpenAPI)**
+- **Maven**
