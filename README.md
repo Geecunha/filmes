@@ -1,10 +1,10 @@
-# 🎬 API de Filmes
+#  API de Filmes
 
 API desenvolvida para cadastrar **Filmes**, visualizar os **diretores** responsáveis por cada produção e suas respectivas **produtoras**.
 
 ---
 
-## 👩‍💻 Autora do Projeto
+##  Autora do Projeto
 
 - **Geovanna Cardoso**
 - Repositório: `filmes-api`
@@ -12,7 +12,7 @@ API desenvolvida para cadastrar **Filmes**, visualizar os **diretores** respons�
 
 ---
 
-## 🧪 Como Rodar Localmente
+##  Como Rodar Localmente
 
 1. **Clone o repositório:**
 
@@ -31,9 +31,9 @@ cd filmes-api
 
 ---
 
-## ✨ Funcionalidades Principais
+##  Funcionalidades Principais
 
-### 🎬 Filme Resource
+###  Filme Resource
 
 | Método | Rota | Descrição |
 |--------|------|-----------|
@@ -48,7 +48,7 @@ cd filmes-api
 
 ---
 
-### 🎥 Diretor Resource
+###  Diretor Resource
 
 | Método | Rota | Descrição |
 |--------|------|-----------|
@@ -60,7 +60,7 @@ cd filmes-api
 
 ---
 
-### 🏢 Produtora Resource
+###  Produtora Resource
 
 | Método | Rota | Descrição |
 |--------|------|-----------|
@@ -72,18 +72,18 @@ cd filmes-api
 
 ---
 
-## 🌍 Deploy
+##  Deploy
 
 Este projeto está hospedado no Railway:
 
 > Acesse a documentação Swagger da API em:  
 > [https://filmes-api-production.up.railway.app/swagger-ui/](https://filmes-api-production.up.railway.app/swagger-ui/)
 
-Você também pode hospedar seu próprio projeto gratuitamente com [Railway](https://railway.app/).
+
 
 ---
 
-## 📚 Tecnologias Utilizadas
+##  Tecnologias Utilizadas
 
 - **Quarkus**
 - **Java 17**
